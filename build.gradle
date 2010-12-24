@@ -1,0 +1,26 @@
+apply plugin: 'groovy'
+
+configurations {
+  provided
+}
+
+sourceSets {
+  main {
+    compileClasspath += configurations.provided
+  }
+}
+
+repositories {
+  def home = System.getProperty('user.home')
+  mavenRepo name: 'mavenLocal', urls: "file:${home}/.m2/repository"
+  mavenCentral()
+}
+
+dependencies {
+  groovy group: 'org.codehaus.groovy', name: 'groovy', version: '1.7.6'
+
+  provided 'javax.servlet:servlet-api:2.5'
+  compile 'org.apache.tomcat:catalina:6.0.26'
+  compile 'org.springframework.data:spring-data-riak:1.0.0.M2-SNAPSHOT'
+
+}
